@@ -1,0 +1,38 @@
+name: servant-htmx
+version: 0.1.0.0
+
+language: GHC2021
+ghc-options:
+  - -Wall
+  - -Wcompat
+  - -Wextra
+
+default-extensions:
+  - BlockArguments
+  - DataKinds
+  - LambdaCase
+  - OverloadedStrings
+  - RecordWildCards
+  - TypeFamilies
+  - UndecidableInstances
+
+dependencies:
+  - base >= 4.14 && < 5
+  - servant
+  - servant-server
+  - text
+  - wai
+
+library:
+  source-dirs: src
+
+tests:
+  servant-htmx-spec: 
+    source-dirs: spec
+    main: Spec.hs
+    build-tools:
+      - hspec-discover
+    dependencies:
+      - servant-htmx
+      - hspec
+      - hspec-wai

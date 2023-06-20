@@ -1,0 +1,13 @@
+with-compiler: ghc-9.2
+
+packages: .
+
+tests: True
+test-options:
+  "--color"
+  "--diff"
+  "--format=specdoc"
+test-show-details: streaming
+
+jobs: $ncpus
+optimization: False

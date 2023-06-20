@@ -1,0 +1,63 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.35.2.
+--
+-- see: https://github.com/sol/hpack
+
+name:           servant-htmx
+version:        0.1.0.0
+build-type:     Simple
+
+library
+  exposed-modules:
+      Servant.HTMX
+  other-modules:
+      Paths_servant_htmx
+  hs-source-dirs:
+      src
+  default-extensions:
+      BlockArguments
+      DataKinds
+      LambdaCase
+      OverloadedStrings
+      RecordWildCards
+      TypeFamilies
+      UndecidableInstances
+  ghc-options: -Wall -Wcompat -Wextra
+  build-depends:
+      base >=4.14 && <5
+    , servant
+    , servant-server
+    , text
+    , wai
+  default-language: GHC2021
+
+test-suite servant-htmx-spec
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Servant.HTMXSpec
+      Paths_servant_htmx
+  hs-source-dirs:
+      spec
+  default-extensions:
+      BlockArguments
+      DataKinds
+      LambdaCase
+      OverloadedStrings
+      RecordWildCards
+      TypeFamilies
+      UndecidableInstances
+  ghc-options: -Wall -Wcompat -Wextra
+  build-tool-depends:
+      hspec-discover:hspec-discover
+  build-depends:
+      base >=4.14 && <5
+    , hspec
+    , hspec-wai
+    , servant
+    , servant-htmx
+    , servant-server
+    , text
+    , wai
+  default-language: GHC2021
