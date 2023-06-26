@@ -19,12 +19,12 @@ spec = with testApplication do
 
   describe "IsHXRequest" do
 
-    it "returns 400 when no HX-Request header is provided" do
-      get "/" `shouldRespondWith` 400
-
     it "returns 200 when a HX-Request header is provided" do
       request "GET" "/" [("HX-Request", "true")] mempty
-        `shouldRespondWith` 200
+        `shouldRespondWith` 200 { matchBody = "IsHXRequest-gated example" }
+
+    it "skips the IsHXRequest route when no HX-Request header is provided" do
+      get "/" `shouldRespondWith` 200 { matchBody = "Example test" }
 
   describe "HXHeaders" do
 
@@ -38,11 +38,13 @@ spec = with testApplication do
 
 type TestAPI =
   IsHXRequest :> Get '[PlainText] Text :<|>
+  Get '[PlainText] Text :<|>
   "headers" :> HXHeaders :> Get '[PlainText] Text
 
 testServer :: Server TestAPI
-testServer = rootHandler :<|> headersHandler
+testServer = hxRequestRootHandler :<|> rootHandler :<|> headersHandler
   where
+    hxRequestRootHandler = pure "IsHXRequest-gated example"
     rootHandler = pure "Example test"
     headersHandler hx =
       pure $ Text.pack $ show hx
